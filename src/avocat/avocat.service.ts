@@ -41,15 +41,12 @@ export class AvocatService {
 
   }
 
-  async softRemove(id: string): Promise<void> {
-    const avocatToRemove = await this.findOne(id);
-    await this.avocatsRepository.softRemove(avocatToRemove);
+  async softDelete(id: string): Promise<void> {
+    await this.avocatsRepository.softDelete(+id);
   }
 
-  async softRecover(id: string) {
-    const avocatToRecover = await this.findOne(id)
-    return await this.avocatsRepository.recover(avocatToRecover);
+  async softRestore(id: string) {
+    return await this.avocatsRepository.restore(+id);
   }
 
-  
 }

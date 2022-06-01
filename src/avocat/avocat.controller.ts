@@ -18,6 +18,11 @@ export class AvocatController {
     return await  this.avocatService.findAll();
   }
 
+  @Get('recover/:id')
+  async recover(@Param('id') id: string){
+    return await this.avocatService.softRestore(id);
+  }
+
   @Get(':id')
   async findOne(@Param('id') id: string) {
     return await this.avocatService.findOne(id);
@@ -29,7 +34,7 @@ export class AvocatController {
   }
 
   @Delete(':id')
-  async remove(@Param('id') id: string) {
-    return await this.avocatService.softRemove(id);
+  async softRemove(@Param('id') id: string) {
+    return await this.avocatService.softDelete(id);
   }
 }
