@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsOptional } from "class-validator";
+import { IsEmail, IsNotEmpty, IsOptional } from "class-validator";
 import { Column } from "typeorm";
 
 export class CreateAvocatDto {

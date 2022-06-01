@@ -1,3 +1,4 @@
+import { NotFoundException } from '@nestjs/common';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -13,8 +14,8 @@ export class AvocatService {
     private avocatsRepository: Repository<AvocatEntity>,
   ) {}
 
-  create(createAvocatDto: CreateAvocatDto) {
-    return 'This action adds a new avocat';
+  async create(createAvocatDto: CreateAvocatDto) {
+    return await this.avocatsRepository.save(createAvocatDto);
   }
 
   async findAll(): Promise<AvocatEntity[]> {
@@ -22,16 +23,32 @@ export class AvocatService {
   }
 
   async findOne(id: string): Promise<AvocatEntity> {
-    return await this.avocatsRepository.findOne(+id);
+    const avocatToFind = await this.avocatsRepository.findOne(+id);
+    if(!avocatToFind)
+      throw new NotFoundException(`L'avocat d'id ${id} n'existe pas.`);
+    return avocatToFind;
   }
 
-  update(id: number, updateAvocatDto: UpdateAvocatDto) {
-    return `This action updates a #${id} avocat`;
+  async update(id: number, updateAvocatDto: UpdateAvocatDto) {
+      const newAvocat = await this.avocatsRepository.preload({
+        id,
+        ...updateAvocatDto
+      })
+      if (! newAvocat)
+      throw new NotFoundException(`le cabinet d'${id} n'existe pas ...`);
+    // sauvegarde les mod
+      return await this.avocatsRepository.save(newAvocat);
+
   }
 
   async softRemove(id: string): Promise<void> {
     const avocatToRemove = await this.findOne(id);
     await this.avocatsRepository.softRemove(avocatToRemove);
+  }
+
+  async softRecover(id: string) {
+    const avocatToRecover = await this.findOne(id)
+    return await this.avocatsRepository.recover(avocatToRecover);
   }
 
   
