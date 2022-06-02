@@ -11,32 +11,42 @@ export class CreateAvocatDto {
   lastName:string;
 
   @Column()
-  @IsNotEmpty()
+  @IsOptional()
   email:string;
 
   @Column()
-  @IsNotEmpty()
+  @IsOptional()
   country:string
 
   @Column()
-  @IsNotEmpty()
+  @IsOptional()
   city:string
 
-  @Column()
-  @IsNotEmpty()
+  @Column({
+    default:254500
+  })
+  @IsOptional()
   contact : number;
 
   @Column()
-  @IsNotEmpty()
+  @IsOptional()
   adress:string;
 
   @Column()
-  @IsNotEmpty()
+  @IsOptional()
   speciality:string;
 
   @Column()
-  @IsNotEmpty()
+  @IsOptional()
   workExp : number;
+
+  @Column()
+  @IsOptional()
+  workNum: number;
+
+  @Column()
+  @IsOptional()
+  dis: boolean;
 
   @Column()
   @IsOptional()
