@@ -3,7 +3,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AvocatModule } from './avocat/avocat.module';
-import { CabinetAdminModule } from './cabinet-admin/cabinet-admin.module';
+import { CabinetModule } from './cabinet/cabinet.module';
+import { AdminCabinetModule } from './admin-cabinet/admin-cabinet.module';
+import { ClientModule } from './client/client.module';
 
 @Module({
   imports: [
@@ -19,7 +21,9 @@ import { CabinetAdminModule } from './cabinet-admin/cabinet-admin.module';
   })
   ,
   AvocatModule,
-  CabinetAdminModule
+  CabinetModule,
+  AdminCabinetModule,
+  ClientModule,
   ],
   controllers: [AppController],
   providers: [AppService],
