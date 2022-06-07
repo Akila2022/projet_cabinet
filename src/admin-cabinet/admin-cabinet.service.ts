@@ -14,7 +14,7 @@ export class AdminCabinetService {
     private adminCabinetRepository : Repository<AdminCabinetEntity>
   ){}
 
-  async subscribe(adminCabinetData : CreateAdminCabinetDto):Promise<AdminCabinetEntity>{
+  async subscribe(adminCabinetData : CreateAdminCabinetDto):Promise<Partial<AdminCabinetEntity>>{
 
     const adminCabinet= this.adminCabinetRepository.create({
       ...adminCabinetData
@@ -26,7 +26,16 @@ export class AdminCabinetService {
     } catch(e) {
       throw new ConflictException(`le nom d'utilisateur et le mot de pass doivent etre unique `);
     }
-    return adminCabinet;
+
+    /*delete adminCabinet.salt;
+    delete adminCabinet.password;*/
+     
+    return {
+      id:adminCabinet.id,
+      userName:adminCabinet.userName,
+      email: adminCabinet.email,
+      password:adminCabinet.password
+    };
   }
 
 

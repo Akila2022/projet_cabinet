@@ -2,16 +2,22 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { AdminCabinetService } from './admin-cabinet.service';
 import { CreateAdminCabinetDto } from './dto/create-admin-cabinet.dto';
 import { UpdateAdminCabinetDto } from './dto/update-admin-cabinet.dto';
+import { AdminCabinetEntity } from './entities/admin-cabinet.entity';
 
 @Controller('admin-cabinet')
 export class AdminCabinetController {
   constructor(private readonly adminCabinetService: AdminCabinetService) {}
 
   @Post('regist-admin-avocat')
-  register(@Body() createAdminCabinetDto: CreateAdminCabinetDto) {
+  register(@Body() createAdminCabinetDto: CreateAdminCabinetDto):Promise<Partial<AdminCabinetEntity>> {
     return this.adminCabinetService.subscribe(createAdminCabinetDto);
   }
 
+/*
+  @Post('login-admin-avocat')
+  login(@Body() loginUserDto : LoginUserDto):Promise<Partial<AdminCabinetEntity>>{
+    return this.loginUserService.login(loginUserDto);
+  }*/
   @Post()
   create(@Body() createAdminCabinetDto: CreateAdminCabinetDto) {
     return this.adminCabinetService.create(createAdminCabinetDto);

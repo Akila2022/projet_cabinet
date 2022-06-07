@@ -6,9 +6,7 @@ export class StampsEntities {
     @Column()
     path : string;
 
-    @Column({
-    unique:true
-    })
+    @Column()
     @IsEmail()
     email:string;
     

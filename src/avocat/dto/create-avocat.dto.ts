@@ -3,6 +3,10 @@ import { Column } from "typeorm";
 
 export class CreateAvocatDto {
   @Column()
+  @IsOptional()
+  userName:string;
+
+  @Column()
   @IsNotEmpty()
   firstName:string;
 

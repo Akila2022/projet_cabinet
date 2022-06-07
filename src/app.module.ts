@@ -6,7 +6,6 @@ import { AvocatModule } from './avocat/avocat.module';
 import { CabinetModule } from './cabinet/cabinet.module';
 import { AdminCabinetModule } from './admin-cabinet/admin-cabinet.module';
 import { ClientModule } from './client/client.module';
-
 @Module({
   imports: [
   TypeOrmModule.forRoot({
@@ -23,9 +22,9 @@ import { ClientModule } from './client/client.module';
   AvocatModule,
   CabinetModule,
   AdminCabinetModule,
-  ClientModule,
+  ClientModule
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService]
 })
 export class AppModule {}
