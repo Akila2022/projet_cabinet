@@ -1,4 +1,5 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
+import { JwtAuthGuard } from 'src/admin-cabinet/guards/jwt-auth.guard';
 import { AvocatService } from './avocat.service';
 import { CreateAvocatDto } from './dto/create-avocat.dto';
 import { UpdateAvocatDto } from './dto/update-avocat.dto';
@@ -14,6 +15,7 @@ export class AvocatController {
   }
 
   @Get()
+  @UseGuards(JwtAuthGuard)
   async findAll() : Promise<AvocatEntity[]> {
     return await  this.avocatService.findAll();
   }

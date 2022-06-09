@@ -1,4 +1,5 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { LoginUserDto } from 'src/generics/login-user.dto';
 import { AdminCabinetService } from './admin-cabinet.service';
 import { CreateAdminCabinetDto } from './dto/create-admin-cabinet.dto';
 import { UpdateAdminCabinetDto } from './dto/update-admin-cabinet.dto';
@@ -13,11 +14,11 @@ export class AdminCabinetController {
     return this.adminCabinetService.subscribe(createAdminCabinetDto);
   }
 
-/*
+
   @Post('login-admin-avocat')
-  login(@Body() loginUserDto : LoginUserDto):Promise<Partial<AdminCabinetEntity>>{
-    return this.loginUserService.login(loginUserDto);
-  }*/
+  login(@Body() loginUserDto : LoginUserDto){
+    return this.adminCabinetService.login(loginUserDto);
+  }
   @Post()
   create(@Body() createAdminCabinetDto: CreateAdminCabinetDto) {
     return this.adminCabinetService.create(createAdminCabinetDto);

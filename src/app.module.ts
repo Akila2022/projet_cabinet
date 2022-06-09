@@ -6,15 +6,20 @@ import { AvocatModule } from './avocat/avocat.module';
 import { CabinetModule } from './cabinet/cabinet.module';
 import { AdminCabinetModule } from './admin-cabinet/admin-cabinet.module';
 import { ClientModule } from './client/client.module';
+import * as dotenv from 'dotenv';
+import { ConfigModule } from '@nestjs/config';
+
+dotenv.config()
 @Module({
   imports: [
-  TypeOrmModule.forRoot({
+   
+    TypeOrmModule.forRoot({
     type: 'postgres',
-    host: 'localhost',
+    host: process.env.DB_HOST,
     port: 5432,
-    username: 'postgres',
-    password: 'root',
-    database: 'projetCabinet',
+    username: process.env.DB_USERNAME,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
     entities: ["dist/**/*.entity{.ts,.js}"],
     synchronize: true,
   })
